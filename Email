@@ -1,0 +1,20 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+[a-z0-9._]+@[a-z]+(\.com|\.in)   { printf("it is valid"); }
+.+                              { printf("it is not valid"); }
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("enter the mail: ");
+    yylex();
+    return 0;
+}
