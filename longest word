@@ -1,0 +1,26 @@
+%{
+#include <stdio.h>
+int maxLength = 0;   // stores length of longest word
+%}
+
+%%
+[a-zA-Z]+   {
+                if (yyleng > maxLength)
+                    maxLength = yyleng;
+            }
+[ \t\n]+    ;   // ignore spaces, tabs, newlines
+.           ;   // ignore any other character
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("Enter a sentence:\n");
+    yylex();
+    printf("Length of longest word = %d\n", maxLength);
+    return 0;
+}
